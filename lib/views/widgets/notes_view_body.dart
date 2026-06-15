@@ -9,6 +9,7 @@ class NotesViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff191919),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -34,7 +35,11 @@ class NotesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(itemBuilder: (context,index){
-      return NoteItem();
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: NoteItem(),
+
+      );
     });
   }
 }

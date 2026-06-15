@@ -7,17 +7,39 @@ class CustemAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
-      children: [
-        Gap(20),
-        Text('Notes',style: TextStyle(
-          fontSize: 27,
-        ),
-        ),
-Spacer(),
-          CustemSearchIcon(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'My Notes',
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+        const SizedBox(height: 0,),
+              Transform.translate(
+                offset: const Offset(0, -4),
+              child:  Text(
+                'Organize your ideas ✨',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+              ),
+            ],
+          ),
 
+          const CustemSearchIcon(),
+        ],
+      ),
     );
   }
 }

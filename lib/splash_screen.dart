@@ -10,19 +10,34 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+// هنا تم تعديل الاسم ليكون متوافقاً تماماً مع السطر اللي فوق
 class _SplashScreenState extends State<SplashScreen> {
+  // متغير للتحكم في ظهور النص التوضيحي
+  double _descriptionOpacity = 0.0;
+
   @override
   void initState() {
     super.initState();
 
-    // 4 ثواني كافية جداً لظهور النصين ورا بعض بشكل مريح
+    // بعد ثانية ونص (لما يكون اسم الأبليكيشن قارب يخلص كتابة) هنظهر النص التوضيحي
+    Timer(const Duration(milliseconds: 1500), () {
+      if (mounted) {
+        setState(() {
+          _descriptionOpacity = 1.0;
+        });
+      }
+    });
+
+    // الانتقال للصفحة الرئيسية بعد 4 ثواني
     Timer(const Duration(seconds: 4), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const NotesView(),
-        ),
-      );
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const NotesView(),
+          ),
+        );
+      }
     });
   }
 
@@ -42,9 +57,9 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 20),
 
-            // اسم التطبيق المتحرك (تعديلك الجديد)
+            // اسم التطبيق المتحرك
             SizedBox(
-              height: 50, // حجز مساحة للخط الكبير عشان الـ Column ميتزقش لتحت وهو بيكتب
+              height: 50,
               child: AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
@@ -63,12 +78,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
             const SizedBox(height: 10),
 
-            // الوصف التوضيحي
-            const Text(
-              "Organize your ideas beautifully ✨",
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
+            // النص التوضيحي مع تأثير الفيد (Fade In)
+            AnimatedOpacity(
+              opacity: _descriptionOpacity,
+              duration: const Duration(milliseconds: 800),
+              child: const Text(
+                "Organize your ideas beautifully ✨",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 16,
+                ),
               ),
             ),
           ],
