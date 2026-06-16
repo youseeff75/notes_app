@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notes_app/constans.dart';
+import 'package:notes_app/views/widgets/add_note_form.dart';
 import 'package:notes_app/views/widgets/custem_text_filed.dart';
 
 import 'custem_butoom.dart';
@@ -15,24 +16,7 @@ class AddNoteBottomSheet extends StatelessWidget {
     return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Gap(24),
-         CustemTextFiled(
-           hint: 'Enter your text',
-        
-         ),
-            Gap(16),
-            CustemTextFiled(
-              hint: 'content',
-              maxLines: 5,
-        
-            ),
-            Gap(15),
-            CustemButtom(),
-          ],
-        
-        ),
+          child: AddNoteForm(),
       ),
     );
   }
