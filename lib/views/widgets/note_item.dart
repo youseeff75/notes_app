@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/widgets/edit_view_body.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key});
@@ -9,101 +10,108 @@ class NoteItem extends StatelessWidget {
       onTap: () {
         // الأكشن لما تضغط على الكارت كله (مثلاً فتح تفاصيل النوت)
       },
-      child: Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: const Color(0xff2B2B2B),
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(.1),
-              blurRadius: 15,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.note_alt_outlined,
-                    color: Color(0xff8B5CF6),
-                    size: 28,
-                  ),
-                ),
-                const Spacer(),
-
-                // زرار الثلاث نقاط بعد تشغيله
-                IconButton(
-                  onPressed: () {
-                    // استدعاء دالة الـ Bottom Sheet هنا عند الضغط
-                    _showMenuBottomSheet(context);
-                  },
-                  icon: const Icon(Icons.more_vert, color: Colors.white),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Flutter Tips',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+      child: GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return EditViewBody();
+          }));
+        },
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: const Color(0xff2B2B2B),
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.1),
+                blurRadius: 15,
+                offset: const Offset(0, 6),
               ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Build your Career with Yousef Ibrahim',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 25),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withOpacity(.15),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Text(
-                    'Personal',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontWeight: FontWeight.w500,
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.note_alt_outlined,
+                      color: Color(0xff8B5CF6),
+                      size: 28,
                     ),
                   ),
+                  const Spacer(),
+
+                  // زرار الثلاث نقاط بعد تشغيله
+                  IconButton(
+                    onPressed: () {
+                      // استدعاء دالة الـ Bottom Sheet هنا عند الضغط
+                      _showMenuBottomSheet(context);
+                    },
+                    icon: const Icon(Icons.more_vert, color: Colors.white),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Flutter Tips',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
-                const Spacer(),
-                const Icon(
-                  Icons.calendar_month_outlined,
-                  size: 20,
-                  color: Colors.white54,
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Build your Career with Yousef Ibrahim',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 18,
                 ),
-                const SizedBox(width: 8),
-                const Text(
-                  'May 21, 2025',
-                  style: TextStyle(
+              ),
+              const SizedBox(height: 25),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.withOpacity(.15),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'Personal',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    Icons.calendar_month_outlined,
+                    size: 20,
                     color: Colors.white54,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(width: 8),
+                  const Text(
+                    'May 21, 2025',
+                    style: TextStyle(
+                      color: Colors.white54,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
