@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import '../../constans.dart';
 
 class CustemButtom extends StatelessWidget {
-  const CustemButtom({super.key, this.onTap});
+  const CustemButtom({super.key, this.onTap, this.isLoading = false});
   final void Function()? onTap;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -18,11 +19,22 @@ class CustemButtom extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Text('Add',style: TextStyle(
-            color:Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),),
+          child: isLoading
+              ? SizedBox(
+            height: 24,
+              width: 24,
+                child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+              )
+              : Text(
+                  'Add',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
         ),
       ),
     );

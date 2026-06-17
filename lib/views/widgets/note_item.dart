@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/views/widgets/edit_view_body.dart';
 
-class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+import '../../models/note_model.dart';
 
+class NoteItem extends StatelessWidget {
+  const NoteItem({super.key, required this.note});
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // الأكشن لما تضغط على الكارت كله (مثلاً فتح تفاصيل النوت)
+
       },
       child: GestureDetector(
         onTap: (){
@@ -19,7 +21,7 @@ class NoteItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xff2B2B2B),
+            color: Color(note.color),
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
@@ -47,11 +49,8 @@ class NoteItem extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-
-                  // زرار الثلاث نقاط بعد تشغيله
                   IconButton(
                     onPressed: () {
-                      // استدعاء دالة الـ Bottom Sheet هنا عند الضغط
                       _showMenuBottomSheet(context);
                     },
                     icon: const Icon(Icons.more_vert, color: Colors.white),
@@ -59,18 +58,18 @@ class NoteItem extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Flutter Tips',
-                style: TextStyle(
+              Text(
+                note.title,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Build your Career with Yousef Ibrahim',
-                style: TextStyle(
+              Text(
+                note.subTitle,
+                style: const TextStyle(
                   color: Colors.white70,
                   fontSize: 18,
                 ),
@@ -87,13 +86,7 @@ class NoteItem extends StatelessWidget {
                       color: Colors.orange.withOpacity(.15),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'Personal',
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+
                   ),
                   const Spacer(),
                   const Icon(
@@ -102,9 +95,9 @@ class NoteItem extends StatelessWidget {
                     color: Colors.white54,
                   ),
                   const SizedBox(width: 8),
-                  const Text(
-                    'May 21, 2025',
-                    style: TextStyle(
+                  Text(
+                   note.data,
+                    style: const TextStyle(
                       color: Colors.white54,
                     ),
                   ),
@@ -116,8 +109,6 @@ class NoteItem extends StatelessWidget {
       ),
     );
   }
-
-  // الدالة اللي بتظهر القائمة السفلية (Bottom Sheet)
   void _showMenuBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -141,8 +132,6 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-
-              // زرار المسح
               ListTile(
                 leading: const Icon(Icons.delete_outline, color: Colors.redAccent),
                 title: const Text(
@@ -154,9 +143,7 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pop(context); // بيقفل الـ Bottom Sheet
-
-                  // رسالة تأكيد للمستخدم إن النوت اتمسحت
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Note deleted successfully'),
